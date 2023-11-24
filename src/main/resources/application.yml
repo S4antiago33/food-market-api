@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    password: 123
+    username: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/market
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+app:
+  jwt:
+    expiration: 60
+    secret: YcOnw7pjYXIgc2VuaGEgc3VwZXIgc2VndXJhIGUgc2VjcmV0YSBxdWUgbmluZ3XDqW0gc2FiZSBxdWFsIMOpLi4u

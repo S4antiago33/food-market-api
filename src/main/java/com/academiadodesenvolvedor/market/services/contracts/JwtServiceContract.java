@@ -13,4 +13,6 @@ public interface JwtServiceContract {
     String encode(User user) throws Exception;
 
     JWTVerifier getVerifier() throws Exception;
+
+    boolean isTokenValid(String jwt);
 }
