@@ -24,7 +24,7 @@ public class CreateUserRequest {
 
     public User convert(){
         User user = new User();
-        user.setName(this.email);
+        user.setEmail(this.email);
         user.setName(this.name);
         user.setPassword(this.password);
 
