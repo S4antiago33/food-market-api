@@ -5,11 +5,13 @@ import com.academiadodesenvolvedor.market.models.Store;
 import com.academiadodesenvolvedor.market.requests.CreateStoreRequest;
 import com.academiadodesenvolvedor.market.services.StoreService;
 import com.academiadodesenvolvedor.market.services.contracts.StoreServiceContract;
+import com.academiadodesenvolvedor.market.utils.UploadFile;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.io.IOException;
 
 @RequestMapping("/stores")
 @RestController
@@ -22,8 +24,25 @@ public class StoreController {
     }
 
     @PostMapping
-    public ResponseEntity<StoreDTO> create(@RequestBody @Valid CreateStoreRequest request){
-        Store store = this.storeService.createStore(request.convert());
+    public ResponseEntity<StoreDTO> create(@RequestBody @Valid CreateStoreRequest request) {
+        Store store = request.convert();
+        try {
+            if (request.getCover() != null) {
+                String coverName = UploadFile.storeFile(request.getCover().split(",")[1],
+                        new String[]{"stores", "logos"});
+                store.setCoverUrl("stores/logos/"+coverName);
+            }
+//@alexjuniorreal @santiago_luiseduardo @__matheusaugusto__ @nildalmosilva
+            if(request.getLogo() != null){
+                String logoName = UploadFile.storeFile(request.getLogo().split(",")[1],
+                        new String[]{"stores", "covers"});
+                store.setLogoUrl("stores/logos/"+logoName);
+            }
+        }catch (IOException exception){
+            throw new RuntimeException("Erro ao salvar os arquivos");
+        }
+
+        this.storeService.createStore(store);
         return new ResponseEntity<>(new StoreDTO(store), HttpStatus.CREATED);
     }
 
