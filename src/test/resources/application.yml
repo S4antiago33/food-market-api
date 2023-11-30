@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testDb
+    username: sa
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+app:
+  jwt:
+    expiration: 60
+    secret: YcOnw7pjYXIgc2VuaGEgc3VwZXIgc2VndXJhIGUgc2VjcmV0YSBxdWUgbmluZ3XDqW0gc2FiZSBxdWFsIMOpLi4u

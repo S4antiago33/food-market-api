@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class ResourceNotFoundHandler {
-
+//rirain
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(ConfigDataResourceNotFoundException.class)
+    @ExceptionHandler(ResourceNotFoundException.class)
     public ExceptionDTO handler(ResourceNotFoundException exception){
         return new ExceptionDTO(exception.getMessage());
     }
